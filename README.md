@@ -49,10 +49,10 @@ Icons	Lucide React
 Maps	Google Maps Embed & Direction Links
 📦 Installation
 # Clone the repository
-git clone https://github.com/sahliadem0106/mawaqit-mosque-locator.git
+git clone https://github.com/sahliadem0106/mawaqit-app.git
 
 # Navigate into the project folder
-cd mawaqit-mosque-locator
+cd MAWAQIT-APP
 
 # Install dependencies
 npm install
