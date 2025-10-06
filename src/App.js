@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Clock, Loader2, Search, Globe, Wifi, Phone, Mail, User, Calendar, Moon, Sun, Navigation, Linkedin } from 'lucide-react';
 
-const PROXY_API_BASE = 'http://localhost:5000/api';
+const PROXY_API_BASE = 'https://mawaqit.net/api/2.0';
 
 export default function MawaqitApp() {
   const [location, setLocation] = useState(null);
