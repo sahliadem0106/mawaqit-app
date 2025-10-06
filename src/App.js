@@ -119,18 +119,48 @@ export default function MawaqitApp() {
   };
 
   const fetchNearbyMosques = async (loc) => {
-  try {
-    const url = `/api/mosque-search?lat=${loc.lat}&lon=${loc.lon}&distance=1`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    const data = await response.json();
-    setMosques(data || []);
-    setLoading(false);
-  } catch (err) {
-    setError(`${t.errorTitle}: ${err.message}`);
-    setLoading(false);
-  }
-};
+    try {
+      // Try the Vercel serverless function first
+      let url = `/api/mosque-search?lat=${loc.lat}&lon=${loc.lon}&distance=5`;
+      let response = await fetch(url);
+      
+      // If that fails, try direct API call
+      if (!response.ok) {
+        console.log('Vercel API failed, trying direct call');
+        url = `https://mawaqit.net/api/2.0/mosque/search?lat=${loc.lat}&lon=${loc.lon}&distance=5`;
+        response = await fetch(url);
+      }
+      
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
+      
+      console.log(`API returned ${data?.length || 0} mosques`);
+      
+      // Sort mosques by distance and filter
+      if (data && data.length > 0) {
+        const mosquesWithDistance = data
+          .filter(mosque => mosque.latitude && mosque.longitude) // Only mosques with valid coordinates
+          .map(mosque => ({
+            ...mosque,
+            calculatedDistance: parseFloat(calculateDistance(loc.lat, loc.lon, mosque.latitude, mosque.longitude))
+          }))
+          .sort((a, b) => a.calculatedDistance - b.calculatedDistance)
+          .filter(mosque => mosque.calculatedDistance <= 5); // Show mosques within 5km
+        
+        console.log(`Filtered to ${mosquesWithDistance.length} mosques within 5km`);
+        console.log('Closest mosque:', mosquesWithDistance[0]?.label, mosquesWithDistance[0]?.calculatedDistance + 'km');
+        
+        setMosques(mosquesWithDistance);
+      } else {
+        setMosques([]);
+      }
+      setLoading(false);
+    } catch (err) {
+      console.error('Fetch error:', err);
+      setError(`${t.errorTitle}: ${err.message}`);
+      setLoading(false);
+    }
+  };
 
   const handleMosqueSelect = (mosque) => {
   setSelectedMosque(mosque);
