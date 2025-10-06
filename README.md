@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+🕌 Mawaqit Mosque Locator App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern web application that helps Muslims locate nearby mosques and access real-time prayer times — powered by 
+[Mawaqit](https://mawaqit.net/en/)
 
-## Available Scripts
+🌍 Live Demo
 
-In the project directory, you can run:
+[Visit the App on Vercel](https://mawaqit-app.vercel.app/)
 
-### `npm start`
+🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+✅ Find Nearby Mosques:
+Automatically detects your location and displays mosques within your area using the Mawaqit database.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+✅ Real-Time Prayer Times:
+Fetches up-to-date prayer times directly from the Mawaqit API for each mosque.
 
-### `npm test`
+✅ Multilingual Support:
+Seamless Arabic ↔ English translation with a single click.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+✅ Map Integration:
 
-### `npm run build`
+View mosque location directly on Google Maps
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Get directions with one click
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Embedded map preview inside each mosque card
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+✅ Mosque Details:
+Displays Jumu‘ah (Friday prayer) times, available facilities, and more.
 
-### `npm run eject`
+✅ Modern UI:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Built with React + TailwindCSS
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Elegant gradient cards and icons
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Responsive on all screen sizes
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+✅ Built for Speed:
+Lightweight, fast, and deployable as a Progressive Web App (PWA).
 
-## Learn More
+🛠️ Tech Stack
+Area	Technology
+Frontend	React.js, TailwindCSS
+Backend / API	Mawaqit API (via proxy/fetch)
+Deployment	Vercel
+Icons	Lucide React
+Maps	Google Maps Embed & Direction Links
+📦 Installation
+# Clone the repository
+git clone https://github.com/sahliadem0106/mawaqit-mosque-locator.git
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Navigate into the project folder
+cd mawaqit-mosque-locator
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Install dependencies
+npm install
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Start the development server
+npm run dev
