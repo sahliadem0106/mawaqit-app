@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Clock, Loader2, Search, Globe, Wifi, Phone, Mail, User, Calendar, Moon, Sun, Navigation, Linkedin } from 'lucide-react';
 
-const PROXY_API_BASE = 'https://mawaqit.net/api/2.0';
+const PROXY_API_BASE = '/api';
 
 export default function MawaqitApp() {
   const [location, setLocation] = useState(null);
@@ -119,25 +119,37 @@ export default function MawaqitApp() {
   };
 
   const fetchNearbyMosques = async (loc) => {
-    try {
-      const url = `${PROXY_API_BASE}/mosque/search?lat=${loc.lat}&lon=${loc.lon}&distance=1`;
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-      const data = await response.json();
-      setMosques(data || []);
-      setLoading(false);
-    } catch (err) {
-      setError(`${t.errorTitle}: ${err.message}`);
-      setLoading(false);
-    }
-  };
+  try {
+    const url = `/api/mosque-search?lat=${loc.lat}&lon=${loc.lon}&distance=1`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const data = await response.json();
+    setMosques(data || []);
+    setLoading(false);
+  } catch (err) {
+    setError(`${t.errorTitle}: ${err.message}`);
+    setLoading(false);
+  }
+};
 
-  const handleMosqueSelect = (mosque) => {
-    setSelectedMosque(mosque);
-    setPrayerTimes(mosque);
-    setError('');
-    setShowMap(false);
-  };
+  const handleMosqueSelect = async (mosque) => {
+  setSelectedMosque(mosque);
+  setError('');
+  setShowMap(false);
+  setLoading(true);
+  
+  try {
+    const response = await fetch(`/api/mosque-details?id=${mosque.uuid}`);
+    if (!response.ok) throw new Error('Failed to fetch details');
+    const data = await response.json();
+    setPrayerTimes(data);
+    setLoading(false);
+  } catch (err) {
+    setError(`${t.errorTitle}: ${err.message}`);
+    setPrayerTimes(mosque); // Fallback to basic mosque data
+    setLoading(false);
+  }
+};
 
   const openInMaps = () => {
     if (!selectedMosque || !location) return;
