@@ -132,25 +132,12 @@ export default function MawaqitApp() {
   }
 };
 
-  const handleMosqueSelect = async (mosque) => {
+  const handleMosqueSelect = (mosque) => {
   setSelectedMosque(mosque);
+  setPrayerTimes(mosque);  // Use the data we already have
   setError('');
   setShowMap(false);
-  setLoading(true);
-  
-  try {
-    const response = await fetch(`/api/mosque-details?id=${mosque.uuid}`);
-    if (!response.ok) throw new Error('Failed to fetch details');
-    const data = await response.json();
-    setPrayerTimes(data);
-    setLoading(false);
-  } catch (err) {
-    setError(`${t.errorTitle}: ${err.message}`);
-    setPrayerTimes(mosque); // Fallback to basic mosque data
-    setLoading(false);
-  }
 };
-
   const openInMaps = () => {
     if (!selectedMosque || !location) return;
     const url = `https://www.google.com/maps/dir/?api=1&origin=${location.lat},${location.lon}&destination=${selectedMosque.latitude},${selectedMosque.longitude}&travelmode=walking`;
